@@ -1,8 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>hoogenbj</groupId>
+  <groupId>za.co.clock24</groupId>
   <artifactId>DsvParser</artifactId>
-  <version>1.0.0-RELEASE</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
   <name>Delimiter Separated Values Parser</name>
   <description>If you need to parse delimited text, this parser is for you. By default it parses comma-delimited text, but any delimiter will do. It can handle embedded strings, line terminators and xml.</description>
@@ -16,7 +21,8 @@
   </licenses>
   <scm>
   	<url>https://github.com/hoogenbj/dsvparser</url>
-  	<connection>https://github.com/hoogenbj/dsvparser.git</connection>
+  	<connection>scm:git:https://github.com/hoogenbj/dsvparser.git</connection>
+  	<developerConnection>scm:git:https://github.com/hoogenbj/dsvparser.git</developerConnection>
   </scm>
   <developers>
   	<developer>
