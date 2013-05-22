@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package hoogenbj;
+package za.co.clock24.dsvparser;
 
 /**
- *
- * Implement this interface if you want the parser to return ready-made objects in the results.
+ * 
+ * A callback can do whatever it wants with the line/record. Once done, if it returns false, the line/record will be filtered from the output.
+ * Implement the callback to, for example, keep count of the lines processed, or to filter lines/records containing certain values.
  * 
  * @author Johan Hoogenboezem
-*/
-public interface DsvRecordParser<T> {
-	T parseRecord(String[] fields);
+ *
+ * @param <T>
+ */
+public interface DsvRecordCallback<T> {
+	
+	boolean processingRecord(T t);
+
 }

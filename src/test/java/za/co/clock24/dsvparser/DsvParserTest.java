@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package hoogenbj;
+package za.co.clock24.dsvparser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,6 +26,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
+
+import za.co.clock24.dsvparser.DsvFieldCallback;
+import za.co.clock24.dsvparser.DsvParser;
+import za.co.clock24.dsvparser.DsvRecordCallback;
+import za.co.clock24.dsvparser.DsvRecordParser;
 
 public class DsvParserTest {
 	private static Logger L = Logger.getLogger(DsvParserTest.class);

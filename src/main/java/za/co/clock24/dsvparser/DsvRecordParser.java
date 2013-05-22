@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package hoogenbj;
+package za.co.clock24.dsvparser;
 
 /**
- * 
- * A callback implementation can do whatever, but it cannot filter the field from processing as a
- * DsvRecordCallback can do with lines/records.
+ *
+ * Implement this interface if you want the parser to return ready-made objects in the results.
  * 
  * @author Johan Hoogenboezem
- *
- */
-public interface DsvFieldCallback {
-
-	void processingField(String field);
-	
+*/
+public interface DsvRecordParser<T> {
+	T parseRecord(String[] fields);
 }

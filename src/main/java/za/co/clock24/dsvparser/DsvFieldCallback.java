@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-package hoogenbj;
+package za.co.clock24.dsvparser;
 
 /**
  * 
- * A callback can do whatever it wants with the line/record. Once done, if it returns false, the line/record will be filtered from the output.
- * Implement the callback to, for example, keep count of the lines processed, or to filter lines/records containing certain values.
+ * A callback implementation can do whatever, but it cannot filter the field from processing as a
+ * DsvRecordCallback can do with lines/records.
  * 
  * @author Johan Hoogenboezem
  *
- * @param <T>
  */
-public interface DsvRecordCallback<T> {
-	
-	boolean processingRecord(T t);
+public interface DsvFieldCallback {
 
+	void processingField(String field);
+	
 }

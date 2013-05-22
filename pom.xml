@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <name>Delimiter Separated Values Parser</name>
   <description>If you need to parse delimited text, this parser is for you. By default it parses comma-delimited text, but any delimiter will do. It can handle embedded strings, line terminators and xml.</description>
-  <url></url>
+  <url>https://github.com/hoogenbj/dsvparser</url>
   <licenses>
   	<license>
       <name>The Apache Software License, Version 2.0</name>
@@ -15,8 +15,8 @@
     </license>
   </licenses>
   <scm>
-  	<url></url>
-  	<connection></connection>
+  	<url>https://github.com/hoogenbj/dsvparser</url>
+  	<connection>https://github.com/hoogenbj/dsvparser.git</connection>
   </scm>
   <developers>
   	<developer>
