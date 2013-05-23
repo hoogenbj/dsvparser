@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>za.co.clock24</groupId>
 	<artifactId>DsvParser</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Delimiter Separated Values Parser</name>
 	<description>If you need to parse delimited text, this parser is for you. By default it parses comma-delimited text, but any delimiter will do. It can handle embedded strings, line terminators and xml.</description>
