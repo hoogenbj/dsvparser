@@ -108,6 +108,7 @@ public class DsvParserTest {
 	}
 
 	int recordCallbackCount = 0;
+	boolean firstLine = true;
 	@Test
 	public void testRecordCallback() throws IOException {
 		StringReader reader = new StringReader("1,2,3,4\n5,6,7,8");
@@ -116,8 +117,10 @@ public class DsvParserTest {
 		parser.setRecordCallback(new DsvRecordCallback<String[]>() {
 			public boolean processingRecord(String[] t) {
 				recordCallbackCount++;
-				if (recordCallbackCount == 1)
+				if (firstLine) {
+					firstLine = false;
 					return false;
+				}
 				else
 					return true;
 			}
@@ -133,10 +136,47 @@ public class DsvParserTest {
 		assertTrue(list.get(0)[3].equals("8"));
 	}
 
+	int fieldCount = 0;
+	int lineCount = 0;
+	@Test
+	public void testFieldCount() throws IOException {
+		StringReader reader = new StringReader("1,2,3,4\n1,2,3,4\n1,2,3,4");
+		DsvParser<String[]> parser = DsvParser.createWithDefaultParser(reader);
+		parser.setFieldCallback(new DsvFieldCallback() {
+			public void processingField(String field) {
+				fieldCount++;
+				System.out.print(fieldCount);
+			}
+		});
+		parser.setRecordCallback(new DsvRecordCallback<String[]>() {
+			public boolean processingRecord(String[] t) {
+				fieldCount = 0;
+				lineCount++;
+				System.out.println("That was line "+lineCount);
+				return true;
+			}
+		});
+		List<String[]> list = parser.readAll();
+		assertNotNull(list);
+		assertTrue(list.size() == 3);
+	}
+
 	@Test
 	public void testStringFields() throws IOException {
 		StringReader reader = new StringReader("1,\"2\",3,4");
 		DsvParser<String[]> parser = DsvParser.createWithDefaultParser(reader);
+		List<String[]> list = parser.readAll();
+		assertNotNull(list);
+		assertTrue(list.size() == 1);
+		assertTrue(list.get(0).length == 4);
+	}
+
+	@Test
+	public void testStringFieldsDifferentConfig() throws IOException {
+		StringReader reader = new StringReader("1;'2';3;4");
+		DsvParser<String[]> parser = DsvParser.createWithDefaultParser(reader);
+		parser.useDelimiter(';');
+		parser.useQuoteCharacter('\'');
 		List<String[]> list = parser.readAll();
 		assertNotNull(list);
 		assertTrue(list.size() == 1);
