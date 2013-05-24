@@ -119,14 +119,9 @@ public class DsvParser<T> {
 			int character = parser.reader.read();
 			if (character == EOF)
 				return new EndState();
-			else if (character == parser.quote) {
-				parser.line = new ArrayList<String>();
-				return new StartStringFieldState();
-			}
 			else {
 				parser.reader.reset();
-				parser.line = new ArrayList<String>();
-				return new StartFieldState();
+				return new LineStartState();
 			}
 		}
 	}
