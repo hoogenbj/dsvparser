@@ -13,3 +13,4 @@ To use, download it or add to your pom:
   		<version>1.0.0</version>
   	</dependency>
 
+Then go to the wiki page here: https://github.com/hoogenbj/dsvparser/wiki
