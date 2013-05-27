@@ -49,6 +49,17 @@ public class DsvParser<T> {
 	private DsvRecordParser<T> dsvRecordParser;
 	private DsvFieldCallback fieldCallback;
 	private DsvRecordCallback<T> recordCallback;
+	private CarriageReturnState carriageReturnState = new CarriageReturnState();
+	private DelimiterState delimiterState = new DelimiterState();
+	private EmbeddedStringState embeddedStringState = new EmbeddedStringState();
+	private EndState endState = new EndState();
+	private FieldState fieldState = new FieldState();
+	private LineFeedState lineFeedState = new LineFeedState();
+	private LineStartState lineStartState = new LineStartState();
+	private StartFieldState startFieldState = new StartFieldState();
+	private StartState startState = new StartState();
+	private StartStringFieldState startStringFieldState = new StartStringFieldState();
+	private StringFieldState stringFieldState = new StringFieldState();
 
 	/**
 	 * Set a callback object that will be invoked after every field is processed. 
@@ -118,10 +129,10 @@ public class DsvParser<T> {
 			parser.reader.mark(1);
 			int character = parser.reader.read();
 			if (character == EOF)
-				return new EndState();
+				return parser.endState;
 			else {
 				parser.reader.reset();
-				return new LineStartState();
+				return parser.lineStartState;
 			}
 		}
 	}
@@ -132,12 +143,12 @@ public class DsvParser<T> {
 			int character = parser.reader.read();
 			if (character == parser.quote) {
 				parser.line = new ArrayList<String>();
-				return new StartStringFieldState();
+				return parser.startStringFieldState;
 			}
 			else {
 				parser.reader.reset();
 				parser.line = new ArrayList<String>();
-				return new StartFieldState();
+				return parser.startFieldState;
 			}
 		}
 	}
@@ -157,24 +168,24 @@ public class DsvParser<T> {
 				parser.newField();
 				parser.addField();
 				parser.addLine();
-				return new EndState();
+				return parser.endState;
 			}
 			else if (character == parser.quote) {
-				return new StartStringFieldState();
+				return parser.startStringFieldState;
 			}
 			else if (character == CARRIAGE_RETURN) {
 				parser.newField();
 				parser.addField();
-				return new CarriageReturnState();
+				return parser.carriageReturnState;
 			}
 			else if (character == NEW_LINE) {
 				parser.newField();
 				parser.addField();
-				return new LineFeedState();
+				return parser.lineFeedState;
 			}
 			else {
 				parser.reader.reset();
-				return new StartFieldState();
+				return parser.startFieldState;
 			}
 		}
 	}
@@ -185,12 +196,12 @@ public class DsvParser<T> {
 			int character = parser.reader.read();
 			if (character == EOF) {
 				parser.addLine();
-				return new EndState();
+				return parser.endState;
 			}
 			else {
 				parser.addLine();
 				parser.reader.reset();
-				return new LineStartState();
+				return parser.lineStartState;
 			}
 		}
 	}
@@ -201,15 +212,15 @@ public class DsvParser<T> {
 			int character = parser.reader.read();
 			if (character == EOF) {
 				parser.addLine();
-				return new EndState();
+				return parser.endState;
 			}
 			else if (character == NEW_LINE) {
-				return new LineFeedState();
+				return parser.lineFeedState;
 			}
 			else {
 				parser.addLine();
 				parser.reader.reset();
-				return new LineStartState();
+				return parser.lineStartState;
 			}
 		}
 	}
@@ -217,14 +228,14 @@ public class DsvParser<T> {
 	private static class StartStringFieldState extends State {
 		State process(DsvParser<?> parser) throws IOException {
 			parser.newField();
-			return new StringFieldState();
+			return parser.stringFieldState;
 		}
 	}
 	
 	private static class StartFieldState extends State {
 		State process(DsvParser<?> parser) throws IOException {
 			parser.newField();
-			return new FieldState();
+			return parser.fieldState;
 		}
 	}
 	
@@ -234,7 +245,7 @@ public class DsvParser<T> {
 			if (character == EOF) {
 				parser.addField();
 				parser.addLine();
-				return new EndState();
+				return parser.endState;
 			}
 			else if (character == parser.quote) {
 				parser.reader.mark(1);
@@ -242,25 +253,25 @@ public class DsvParser<T> {
 				if (next == EOF) {
 					parser.addField();
 					parser.addLine();
-					return new EndState();
+					return parser.endState;
 				}
 				else if (next == parser.delimeter) {
 					parser.addField();
-					return new DelimiterState();
+					return parser.delimiterState;
 				}
 				else if (next == CARRIAGE_RETURN) {
 					parser.addField();
-					return new CarriageReturnState();
+					return parser.carriageReturnState;
 				}
 				else if (next == NEW_LINE) { 
 					parser.addField();
-					return new LineFeedState();
+					return parser.lineFeedState;
 				}
 				else {
 					parser.writeToField(character);
 					parser.reader.reset();
 					parser.stack.push(this);
-					return new EmbeddedStringState();
+					return parser.embeddedStringState;
 				}
 			}
 			else {
@@ -276,24 +287,24 @@ public class DsvParser<T> {
 			if (character == EOF) {
 				parser.addField();
 				parser.addLine();
-				return new EndState();
+				return parser.endState;
 			}
 			else if (character == parser.quote) {
 				parser.writeToField(character);
 				parser.stack.push(this);
-				return new EmbeddedStringState();
+				return parser.embeddedStringState;
 			}
 			else if (character == parser.delimeter) {
 				parser.addField();
-				return new DelimiterState();
+				return parser.delimiterState;
 			}
 			else if (character == CARRIAGE_RETURN) {
 				parser.addField();
-				return new CarriageReturnState();
+				return parser.carriageReturnState;
 			}
 			else if (character == NEW_LINE) { 
 				parser.addField();
-				return new LineFeedState();
+				return parser.lineFeedState;
 			}
 			else {
 				parser.writeToField(character);
@@ -308,7 +319,7 @@ public class DsvParser<T> {
 			if (character == EOF) {
 				parser.addField();
 				parser.addLine();
-				return new EndState();
+				return parser.endState;
 			}
 			else if (character == parser.quote) {
 				parser.writeToField(character);
