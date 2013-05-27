@@ -10,7 +10,7 @@ To use, download it or add to your pom:
   	<dependency>
   		<groupId>za.co.clock24</groupId>
   		<artifactId>DsvParser</artifactId>
-  		<version>1.0.0</version>
+  		<version>1.0.1</version>
   	</dependency>
 
 Then go to the wiki page here: https://github.com/hoogenbj/dsvparser/wiki
