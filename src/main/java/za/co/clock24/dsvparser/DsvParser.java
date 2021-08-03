@@ -20,10 +20,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.collections.ArrayStack;
 
 /**
  * 
@@ -39,27 +38,27 @@ public class DsvParser<T> {
 	private static final char CARRIAGE_RETURN = '\r';
 	private static final char NEW_LINE = '\n';
 
-	private Reader reader;
-	private List<T> lines = new ArrayList<T>();
+	private final Reader reader;
+	private final List<T> lines = new ArrayList<T>();
 	private List<String> line;
 	private StringWriter fieldWriter;
-	private ArrayStack stack = new ArrayStack();
+	private final ArrayDeque stack = new ArrayDeque();
 	private char delimeter = ',';
 	private char quote = '"';
-	private DsvRecordParser<T> dsvRecordParser;
+	private final DsvRecordParser<T> dsvRecordParser;
 	private DsvFieldCallback fieldCallback;
 	private DsvRecordCallback<T> recordCallback;
-	private CarriageReturnState carriageReturnState = new CarriageReturnState();
-	private DelimiterState delimiterState = new DelimiterState();
-	private EmbeddedStringState embeddedStringState = new EmbeddedStringState();
-	private EndState endState = new EndState();
-	private FieldState fieldState = new FieldState();
-	private LineFeedState lineFeedState = new LineFeedState();
-	private LineStartState lineStartState = new LineStartState();
-	private StartFieldState startFieldState = new StartFieldState();
+	private final CarriageReturnState carriageReturnState = new CarriageReturnState();
+	private final DelimiterState delimiterState = new DelimiterState();
+	private final EmbeddedStringState embeddedStringState = new EmbeddedStringState();
+	private final EndState endState = new EndState();
+	private final FieldState fieldState = new FieldState();
+	private final LineFeedState lineFeedState = new LineFeedState();
+	private final LineStartState lineStartState = new LineStartState();
+	private final StartFieldState startFieldState = new StartFieldState();
 	private StartState startState = new StartState();
-	private StartStringFieldState startStringFieldState = new StartStringFieldState();
-	private StringFieldState stringFieldState = new StringFieldState();
+	private final StartStringFieldState startStringFieldState = new StartStringFieldState();
+	private final StringFieldState stringFieldState = new StringFieldState();
 
 	/**
 	 * Set a callback object that will be invoked after every field is processed. 
