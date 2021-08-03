@@ -185,7 +185,7 @@ public class DsvParserTest {
 
 	@Test
 	public void testStringFieldsEmbeddedComma() throws IOException {
-		StringReader reader = new StringReader("1,\"2.1,2.2\",3,4");
+		StringReader reader = new StringReader("1, \"2.1,2.2\",3,4");
 		DsvParser<String[]> parser = DsvParser.createWithDefaultParser(reader);
 		List<String[]> list = parser.readAll();
 		assertNotNull(list);
