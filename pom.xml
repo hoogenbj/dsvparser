@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>za.co.clock24</groupId>
     <artifactId>DsvParser</artifactId>
-    <version>1.0.3</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
     <name>Delimiter Separated Values Parser</name>
     <description>If you need to parse delimited text, this parser is for you. By default it parses comma-delimited text,
@@ -33,10 +33,6 @@
             <name>Johan Hoogenboezem</name>
         </developer>
     </developers>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -80,10 +76,6 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <executions>
@@ -124,6 +116,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

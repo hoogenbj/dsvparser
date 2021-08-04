@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="DsvParser" target="1.8" />
+      <module name="DsvParser" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
