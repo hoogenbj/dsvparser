@@ -13,7 +13,7 @@ To use, download it or add to your pom.xml:
 <dependency>
 	<groupId>za.co.clock24</groupId>
 	<artifactId>DsvParser</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 </dependency>
 ```
 
