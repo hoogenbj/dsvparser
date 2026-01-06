@@ -5,7 +5,7 @@ open source libraries (like opencsv, jcsv and others) that I tried, could handle
 and make it work. I had an existing Finite State Machine-based parser that I was using in a personal project and found it easy to modify. A
 friend suggested that I share it, so here it is.
 
-Copyright 2013-2022 Johan Hoogenboezem
+Copyright 2013-2026 Johan Hoogenboezem
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/za.co.clock24/DsvParser/badge.svg)](https://maven-badges.herokuapp.com/maven-central/za.co.clock24/DsvParser/)
 
