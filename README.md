@@ -7,7 +7,7 @@ friend suggested that I share it, so here it is.
 
 Copyright 2013-2026 Johan Hoogenboezem
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/za.co.clock24/DsvParser/badge.svg)](https://maven-badges.herokuapp.com/maven-central/za.co.clock24/DsvParser/)
+![Maven Central Version](https://img.shields.io/maven-central/v/za.co.clock24/DsvParser)
 
 To use, add to your `pom.xml` or your `build.gradle`
 
